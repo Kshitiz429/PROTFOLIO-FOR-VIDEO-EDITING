@@ -3,8 +3,8 @@ export default function Navbar({ onScrollTo, hasInteracted }) {
     <>
       <style>{`
         @keyframes fadeInUINav {
-          0% { opacity: 0; transform: translateY(-10px); }
-          100% { opacity: 1; transform: translateY(0); }
+          0% { opacity: 0; filter: blur(10px); transform: translateY(-10px); }
+          100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
         }
         .animate-ui-nav { opacity: 0; animation: fadeInUINav 0.5s ease-out forwards; }
       `}</style>

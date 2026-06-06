@@ -63,15 +63,15 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       const rect = el.getBoundingClientRect();
       const w = rect.width || 140;
       const h = rect.height || 45;
-      
+
       // Random starting coordinates spread across screen
       const startX = Math.random() * (window.innerWidth - w - 40) + 20;
       const startY = Math.random() * (window.innerHeight - h - 100) + 50;
-      
+
       // Random speed vector
       const speed = Math.random() * 1.2 + 1.2;
       const angle = Math.random() * Math.PI * 2;
-      
+
       return {
         el,
         w,
@@ -84,7 +84,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
     });
 
     let animationId;
-    
+
     const updatePhysics = () => {
       const screenW = window.innerWidth;
       const screenH = window.innerHeight;
@@ -147,10 +147,10 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
   }, []);
 
   return (
-    <section 
+    <section
       ref={heroRef}
       className="relative h-screen w-full bg-[#020617] overflow-hidden flex flex-col justify-between origin-center select-none isolate"
-      style={{ 
+      style={{
         willChange: 'transform, filter, opacity',
         background: 'radial-gradient(circle at center, rgba(0, 85, 255, 0.42) 0%, rgba(2, 6, 22, 1) 75%)'
       }}
@@ -172,8 +172,8 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
             100% { opacity: 1; transform: translateX(0) skewX(0); filter: drop-shadow(0 15px 30px rgba(0,0,0,0.65)); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
           }
           @keyframes fadeInUI {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; filter: blur(10px); transform: translateY(10px); }
+            100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
           }
           .animate-pop-up { animation: popUpText 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
           .animate-glitch { opacity: 0; animation: glitchReveal 0.6s ease-out 1s forwards; }
@@ -181,7 +181,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
         `}
       </style>
       {/* Background large text "VIDEO EDITOR" */}
-      <div 
+      <div
         ref={bgTextRef}
         className="absolute inset-0 flex flex-col justify-center items-center z-0 pointer-events-none select-none transition-transform duration-200 ease-out"
         style={{ willChange: 'transform' }}
@@ -190,7 +190,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           <h1 className="font-display-xl text-[12vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] text-[#0090ff] filter drop-shadow-[0_0_20px_rgba(0,144,255,0.2)]">
             Video
           </h1>
-          <h1 
+          <h1
             className="font-display-xl text-[12vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] text-[#06183a] -mt-1"
             style={{
               WebkitTextStroke: '1.5px rgba(0, 85, 255, 0.15)',
@@ -203,18 +203,18 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       </div>
 
       {/* Centered Character Layer (Premium Soft Shadow) */}
-      <div 
+      <div
         className="absolute inset-0 flex items-end justify-center pointer-events-none"
-        style={{ 
+        style={{
           transform: 'translate3d(0, 0, 0)',
           transformStyle: 'preserve-3d',
           zIndex: 10
         }}
       >
-        <img 
-          alt="Cinematic portfolio hero image of Kshitiz" 
+        <img
+          alt="Cinematic portfolio hero image of Kshitiz"
           className="h-[65vh] md:h-[88vh] w-auto object-contain select-none pointer-events-auto animate-glitch"
-          style={{ 
+          style={{
             filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.65))'
           }}
           src="/hero-character-sticker.png"
@@ -222,13 +222,13 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       </div>
 
       {/* Floating Tool Blocks - Randomly bouncing around 1st page */}
-      
+
       {/* Block 1: Premiere Pro */}
-      <div 
+      <div
         ref={el => blocksRef.current[0] = el}
         className="absolute top-0 left-0 pointer-events-none z-20"
       >
-        <div 
+        <div
           className={`glass-card rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg hover:scale-105 transition-all duration-300 select-none cursor-default ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           style={{ background: 'rgba(2, 6, 22, 0.45)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
@@ -240,11 +240,11 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       </div>
 
       {/* Block 2: After Effects */}
-      <div 
+      <div
         ref={el => blocksRef.current[1] = el}
         className="absolute top-0 left-0 pointer-events-none z-20"
       >
-        <div 
+        <div
           className={`glass-card rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg hover:scale-105 transition-all duration-300 select-none cursor-default ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           style={{ background: 'rgba(2, 6, 22, 0.45)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
@@ -256,11 +256,11 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       </div>
 
       {/* Block 3: CapCut Pro */}
-      <div 
+      <div
         ref={el => blocksRef.current[2] = el}
         className="absolute top-0 left-0 pointer-events-none z-20"
       >
-        <div 
+        <div
           className={`glass-card rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg hover:scale-105 transition-all duration-300 select-none cursor-default ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           style={{ background: 'rgba(2, 6, 22, 0.45)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
@@ -271,11 +271,11 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
         </div>
       </div>
 
-      <div 
+      <div
         ref={el => blocksRef.current[3] = el}
         className="absolute top-0 left-0 pointer-events-none z-20"
       >
-        <div 
+        <div
           className={`glass-card rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg hover:scale-105 transition-all duration-300 select-none cursor-default ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           style={{ background: 'rgba(2, 6, 22, 0.45)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
@@ -295,9 +295,9 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
 
       {/* Right Column Showreel Card (Foreground UI) */}
       <div className={`absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-end transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button 
+        <button
           onClick={() => setIsCatalogueOpen(true)}
-          className="glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all duration-300 group" 
+          className="glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all duration-300 group"
           style={{ background: 'rgba(2, 6, 22, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
         >
           <span className="font-display-lg text-[10px] md:text-xs font-bold text-white tracking-[0.3em] uppercase group-hover:text-[#00d2ff] transition-colors">Catalouge</span>
@@ -309,11 +309,11 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
       {isCatalogueOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
             onClick={() => setIsCatalogueOpen(false)}
           />
-          
+
           {/* Modal Content */}
           <style>
             {`
@@ -334,17 +334,17 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           <div className="relative w-full max-w-lg bg-[#020616] border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] p-6 md:p-8 m-4 flex flex-col gap-6" style={{ animation: 'blurIn 1s ease-out forwards' }}>
             <div className="flex justify-between items-center border-b border-white/10 pb-4">
               <h2 className="font-display-lg text-lg md:text-xl font-bold text-white tracking-[0.2em] uppercase">Catalouge</h2>
-              <button 
+              <button
                 onClick={() => setIsCatalogueOpen(false)}
                 className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
               >
                 <span className="material-symbols-outlined text-sm">close</span>
               </button>
             </div>
-            
+
             <div className="flex flex-col gap-4">
               {REELS.map((reel, idx) => (
-                <div 
+                <div
                   key={idx}
                   onClick={() => {
                     setIsCatalogueOpen(false);
@@ -353,7 +353,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
                   className="flex items-center gap-4 cursor-pointer group hover:bg-white/5 p-2 -m-2 rounded-xl transition-colors"
                 >
                   <div className="relative w-24 h-16 md:w-32 md:h-20 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/5 shadow-lg">
-                    <video 
+                    <video
                       className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500"
                       src={`${reel.video_url}#t=2.0`}
                       preload="metadata"
