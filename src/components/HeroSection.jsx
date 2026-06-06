@@ -292,9 +292,9 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
         </div>
       </div>
 
-      {/* Left Column Text Info (Foreground UI) */}
-      <div className={`absolute left-6 md:left-12 top-1/2 -translate-y-1/2 max-w-[200px] md:max-w-[260px] z-20 flex flex-col items-start text-left transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <p className="font-body-md text-[11px] md:text-sm text-white/60 leading-relaxed font-medium tracking-wide">
+      {/* Text Info (Foreground UI) */}
+      <div className={`absolute left-1/2 -translate-x-1/2 top-[12vh] md:left-12 md:translate-x-0 md:top-1/2 md:-translate-y-1/2 w-full max-w-[320px] md:max-w-[260px] px-6 md:px-0 z-20 flex flex-col items-center text-center md:items-start md:text-left transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <p className="font-body-md text-xs md:text-sm text-white/60 leading-relaxed font-medium tracking-wide">
           I guide visual direction, define dynamic pacing, and ensure every frame aligns with the brand's vision.
         </p>
       </div>
@@ -305,7 +305,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           {/* Inspired Glowing Lights */}
           <div className="absolute -inset-1.5 bg-gradient-to-r from-[#f0f8ff] via-blue-600/50 to-[#00d2ff] rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500 animate-gradient-move"></div>
           <div className="absolute -inset-[1px] bg-gradient-to-r from-[#f0f8ff] via-[#051024] to-[#00d2ff] rounded-xl opacity-60 group-hover:opacity-90 transition duration-500 animate-gradient-move"></div>
-          
+
           <button
             onClick={() => setIsCatalogueOpen(true)}
             className="relative glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl transition-all duration-300"
@@ -388,12 +388,22 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
         </div>
       )}
 
-      {/* Bottom Horizontal Disciplines Row */}
-      <div className={`absolute bottom-6 left-6 right-6 md:left-12 md:right-12 z-20 flex justify-between gap-4 overflow-x-auto text-[8px] md:text-xs tracking-[0.2em] font-semibold text-white/40 uppercase select-none transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      {/* Disciplines - Desktop (Bottom Row) */}
+      <div className={`hidden md:flex absolute bottom-6 left-12 right-12 z-20 justify-between gap-4 text-xs tracking-[0.2em] font-semibold text-white/40 uppercase select-none transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <span className="hover:text-white transition-colors cursor-default">Video Editing</span>
         <span className="hover:text-white transition-colors cursor-default">Color Grading</span>
         <span className="hover:text-white transition-colors cursor-default">Sound Design</span>
         <span className="hover:text-white transition-colors cursor-default font-bold text-[#00d2ff]">Motion Design</span>
+      </div>
+
+      {/* Disciplines - Mobile (Side Stacks) */}
+      <div className={`flex md:hidden absolute top-[55%] left-6 z-20 flex-col gap-10 text-[9px] tracking-[0.2em] font-semibold text-white/40 uppercase select-none transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <span className="hover:text-white transition-colors cursor-default w-min">Video Editing</span>
+        <span className="hover:text-white transition-colors cursor-default w-min">Color Grading</span>
+      </div>
+      <div className={`flex md:hidden absolute top-[55%] right-6 z-20 flex-col items-end gap-10 text-[9px] tracking-[0.2em] font-semibold text-white/40 uppercase select-none transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <span className="hover:text-white transition-colors cursor-default w-min text-right">Sound Design</span>
+        <span className="hover:text-white transition-colors cursor-default w-min text-right font-bold text-[#00d2ff]">Motion Design</span>
       </div>
     </section>
   );
