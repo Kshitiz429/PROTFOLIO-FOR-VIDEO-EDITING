@@ -177,7 +177,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           }
           .animate-pop-up { animation: popUpText 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
           .animate-glitch { opacity: 0; animation: glitchReveal 0.6s ease-out 1s forwards; }
-          .animate-ui { opacity: 0; animation: fadeInUI 0.5s ease-out forwards; }
+          .animate-ui { opacity: 0; animation: fadeInUI 1s ease-out forwards; }
         `}
       </style>
       {/* Background large text "VIDEO EDITOR" */}
