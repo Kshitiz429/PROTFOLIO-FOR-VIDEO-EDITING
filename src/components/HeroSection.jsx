@@ -178,6 +178,12 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           .animate-pop-up { animation: popUpText 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
           .animate-glitch { opacity: 0; animation: glitchReveal 0.6s ease-out 1s forwards; }
           .animate-ui { opacity: 0; animation: fadeInUI 1s ease-out forwards; }
+          @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradient-move { animation: moveGradient 3s ease infinite; background-size: 200% 200%; }
         `}
       </style>
       {/* Background large text "VIDEO EDITOR" */}
@@ -293,16 +299,22 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
         </p>
       </div>
 
-      {/* Right Column Showreel Card (Foreground UI) */}
-      <div className={`absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-end transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-        <button
-          onClick={() => setIsCatalogueOpen(true)}
-          className="glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all duration-300 group"
-          style={{ background: 'rgba(2, 6, 22, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)' }}
-        >
-          <span className="font-display-lg text-[10px] md:text-xs font-bold text-white tracking-[0.3em] uppercase group-hover:text-[#00d2ff] transition-colors">Catalouge</span>
-          <span className="material-symbols-outlined text-white/50 text-sm group-hover:text-[#00d2ff]/80 transition-colors">video_library</span>
-        </button>
+      {/* Centered Showreel Card (Foreground UI) */}
+      <div className={`absolute left-1/2 bottom-[15%] md:bottom-20 -translate-x-1/2 z-30 flex flex-col items-center transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className="relative group transition-transform duration-300 hover:scale-105 cursor-pointer">
+          {/* Inspired Glowing Lights */}
+          <div className="absolute -inset-1.5 bg-gradient-to-r from-[#f0f8ff] via-blue-600/50 to-[#00d2ff] rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500 animate-gradient-move"></div>
+          <div className="absolute -inset-[1px] bg-gradient-to-r from-[#f0f8ff] via-[#051024] to-[#00d2ff] rounded-xl opacity-60 group-hover:opacity-90 transition duration-500 animate-gradient-move"></div>
+          
+          <button
+            onClick={() => setIsCatalogueOpen(true)}
+            className="relative glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl transition-all duration-300"
+            style={{ background: 'rgba(5, 5, 10, 0.85)', border: '1px solid rgba(255, 255, 255, 0.05)' }}
+          >
+            <span className="font-display-lg text-[10px] md:text-xs font-bold text-white/90 tracking-[0.3em] uppercase group-hover:text-white transition-colors">Catalouge</span>
+            <span className="material-symbols-outlined text-white/50 text-sm group-hover:text-white/90 transition-colors">video_library</span>
+          </button>
+        </div>
       </div>
 
       {/* Catalogue Modal */}
