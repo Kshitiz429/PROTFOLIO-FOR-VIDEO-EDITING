@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { REELS } from '../data/reels';
 import VideoModal from '../components/VideoModal';
@@ -7,6 +7,22 @@ export default function MyWorks() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [scrambledReels, setScrambledReels] = useState([]);
   const navigate = useNavigate();
+  const videoRefs = useRef([]);
+
+  // Auto-pause background videos when full-screen modal is open (Option 2)
+  useEffect(() => {
+    if (selectedVideo) {
+      videoRefs.current.forEach(vid => {
+        if (vid) vid.pause();
+      });
+    } else {
+      videoRefs.current.forEach(vid => {
+        if (vid) {
+          vid.play().catch(e => console.log("Auto-play prevented", e));
+        }
+      });
+    }
+  }, [selectedVideo]);
 
   // Scramble videos on mount
   useEffect(() => {
@@ -35,6 +51,7 @@ export default function MyWorks() {
     { top: '38%', left: '65%', width: '15%', height: '55%', rotate: '-3deg', zIndex: 40 },
     { top: '15%', left: '82%', width: '16%', height: '60%', rotate: '-6deg', zIndex: 20 },
     { top: '68%', left: '12%', width: '20%', height: '25%', rotate: '8deg', zIndex: 50 },
+    { top: '70%', left: '58%', width: '18%', height: '28%', rotate: '-7deg', zIndex: 50 },
   ];
 
   return (
@@ -76,7 +93,7 @@ export default function MyWorks() {
 
           {/* Desktop Arc Layout Container */}
           <div className="hidden lg:block relative w-full aspect-[21/9] max-h-[700px] pointer-events-auto">
-            {scrambledReels.slice(0, 8).map((reel, idx) => {
+            {scrambledReels.slice(0, 9).map((reel, idx) => {
               const pos = LAYOUT_POSITIONS[idx] || LAYOUT_POSITIONS[0];
               const delay = `${idx * 0.2}s`;
               return (
@@ -96,8 +113,9 @@ export default function MyWorks() {
                   onClick={() => setSelectedVideo(reel)}
                 >
                   <video
+                    ref={el => videoRefs.current[idx] = el}
                     className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                    src={`${reel.video_url}#t=1.0`}
+                    src={`${reel.preview_url || reel.video_url}#t=${reel.thumbnailTime || 1.0}`}
                     poster={reel.poster}
                     autoPlay
                     loop
@@ -108,12 +126,6 @@ export default function MyWorks() {
                     onContextMenu={(e) => e.preventDefault()}
                     disablePictureInPicture
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute bottom-3 left-0 w-full text-center px-2">
-                    <h3 className="text-white font-display-lg font-bold text-xs sm:text-sm xl:text-base tracking-wide drop-shadow-md truncate">
-                      {reel.title}
-                    </h3>
-                  </div>
                 </div>
               );
             })}
@@ -128,8 +140,9 @@ export default function MyWorks() {
                 onClick={() => setSelectedVideo(reel)}
               >
                 <video
+                  ref={el => videoRefs.current[idx + 8] = el}
                   className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                  src={`${reel.video_url}#t=1.0`}
+                  src={`${reel.preview_url || reel.video_url}#t=${reel.thumbnailTime || 1.0}`}
                   poster={reel.poster}
                   autoPlay
                   loop
@@ -140,12 +153,6 @@ export default function MyWorks() {
                   onContextMenu={(e) => e.preventDefault()}
                   disablePictureInPicture
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
-                <div className="absolute bottom-4 left-0 w-full text-center px-4">
-                  <h3 className="text-white font-display-lg font-bold text-base tracking-wide drop-shadow-md">
-                    {reel.title}
-                  </h3>
-                </div>
               </div>
             ))}
           </div>
