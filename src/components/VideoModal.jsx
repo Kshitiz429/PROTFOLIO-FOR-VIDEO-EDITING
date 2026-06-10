@@ -142,6 +142,9 @@ export default function VideoModal({ project, onClose }) {
               onClick={togglePlay}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
+              controlsList="nodownload"
+              onContextMenu={(e) => e.preventDefault()}
+              disablePictureInPicture
             />
 
             {/* Custom Styled Video.js Inspired HUD Overlay */}

@@ -15,15 +15,6 @@ export default function Navbar({ onScrollTo, hasInteracted }) {
       >
         KSHITIZ ®
       </div>
-      
-      <a 
-        href="https://instagram.com/kshitizgotbarss" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="font-display-lg text-[10px] md:text-xs font-bold text-black bg-white hover:bg-[#00d2ff] hover:text-black transition-all px-5 py-2 md:px-6 md:py-2.5 rounded-full tracking-widest uppercase shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:shadow-[0_0_20px_rgba(0,210,255,0.3)] pointer-events-auto hover:scale-105"
-      >
-        Hire Me
-      </a>
     </header>
     </>
   );

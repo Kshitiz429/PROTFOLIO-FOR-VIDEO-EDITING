@@ -1,25 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-const REELS = [
-  {
-    title: 'Motion Graphics 01',
-    video_url: 'https://mkawnzhhmksfhjxcofws.supabase.co/storage/v1/object/sign/videos/0604.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8yNDYzNjZmYy05ZDY5LTRkMjItYmExZC01ZjhlYzM2ZjgyZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MvMDYwNC5tcDQiLCJpYXQiOjE3ODA2ODI1NjEsImV4cCI6MTgxMjIxODU2MX0.U5yMnpMNjDaulouczlZGyw6Q4C_SvKEiitUE3p6yX9E'
-  },
-  {
-    title: 'Motion Graphics 02',
-    video_url: 'https://mkawnzhhmksfhjxcofws.supabase.co/storage/v1/object/sign/videos/PROTFOLIO-01.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8yNDYzNjZmYy05ZDY5LTRkMjItYmExZC01ZjhlYzM2ZjgyZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3MvUFJPVEZPTElPLTAxLm1wNCIsImlhdCI6MTc4MDY4MjU3NiwiZXhwIjoxODEyMjE4NTc2fQ.5YK4Jpd92sBfaspX_ZwviXwNVIPdgvXqgmJhYMZ-G54'
-  },
-  {
-    title: 'Motion Graphics 03',
-    video_url: 'https://mkawnzhhmksfhjxcofws.supabase.co/storage/v1/object/sign/videos/storytelling.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8yNDYzNjZmYy05ZDY5LTRkMjItYmExZC01ZjhlYzM2ZjgyZjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2aWRlb3Mvc3Rvcnl0ZWxsaW5nLm1wNCIsImlhdCI6MTc4MDY4MjU4NSwiZXhwIjoxODEyMjE4NTg1fQ.phNe9Xyt8ApYqTFgkh5FZtY_ZqC3zlGIiFry1oOuLrw'
-  }
-];
-
-export default function HeroSection({ onPlayShowreel, hasInteracted }) {
+export default function HeroSection({ onPlayShowreel, hasInteracted, isBlurred }) {
   const heroRef = useRef(null);
   const bgTextRef = useRef(null);
   const blocksRef = useRef([]);
-  const [isCatalogueOpen, setIsCatalogueOpen] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -149,7 +134,7 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
   return (
     <section
       ref={heroRef}
-      className="relative h-screen w-full bg-[#020617] overflow-hidden flex flex-col justify-between origin-center select-none isolate"
+      className={`relative h-screen w-full bg-[#020617] overflow-hidden flex flex-col justify-between origin-center select-none isolate transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${isBlurred ? 'blur-[12px] scale-[0.97] opacity-40 pointer-events-none' : 'opacity-100 scale-100'}`}
       style={{
         willChange: 'transform, filter, opacity',
         background: 'radial-gradient(circle at center, rgba(0, 85, 255, 0.42) 0%, rgba(2, 6, 22, 1) 75%)'
@@ -306,87 +291,18 @@ export default function HeroSection({ onPlayShowreel, hasInteracted }) {
           <div className="absolute -inset-1.5 bg-gradient-to-r from-[#f0f8ff] via-blue-600/50 to-[#00d2ff] rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition duration-500 animate-gradient-move"></div>
           <div className="absolute -inset-[1px] bg-gradient-to-r from-[#f0f8ff] via-[#051024] to-[#00d2ff] rounded-xl opacity-60 group-hover:opacity-90 transition duration-500 animate-gradient-move"></div>
 
-          <button
-            onClick={() => setIsCatalogueOpen(true)}
+          <Link
+            to="/works"
             className="relative glass-card rounded-xl px-6 py-4 flex items-center justify-center gap-3 shadow-2xl transition-all duration-300"
             style={{ background: 'rgba(5, 5, 10, 0.85)', border: '1px solid rgba(255, 255, 255, 0.05)' }}
           >
             <span className="font-display-lg text-[10px] md:text-xs font-bold text-white/90 tracking-[0.3em] uppercase group-hover:text-white transition-colors">Catalouge</span>
             <span className="material-symbols-outlined text-white/50 text-sm group-hover:text-white/90 transition-colors">video_library</span>
-          </button>
+          </Link>
         </div>
       </div>
 
-      {/* Catalogue Modal */}
-      {isCatalogueOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-auto">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
-            onClick={() => setIsCatalogueOpen(false)}
-          />
 
-          {/* Modal Content */}
-          <style>
-            {`
-              @keyframes blurIn {
-                0% {
-                  opacity: 0;
-                  filter: blur(20px);
-                  transform: scale(0.95);
-                }
-                100% {
-                  opacity: 1;
-                  filter: blur(0px);
-                  transform: scale(1);
-                }
-              }
-            `}
-          </style>
-          <div className="relative w-full max-w-lg bg-[#020616] border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] p-6 md:p-8 m-4 flex flex-col gap-6" style={{ animation: 'blurIn 1s ease-out forwards' }}>
-            <div className="flex justify-between items-center border-b border-white/10 pb-4">
-              <h2 className="font-display-lg text-lg md:text-xl font-bold text-white tracking-[0.2em] uppercase">Catalouge</h2>
-              <button
-                onClick={() => setIsCatalogueOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors"
-              >
-                <span className="material-symbols-outlined text-sm">close</span>
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {REELS.map((reel, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => {
-                    setIsCatalogueOpen(false);
-                    onPlayShowreel(reel);
-                  }}
-                  className="flex items-center gap-4 cursor-pointer group hover:bg-white/5 p-2 -m-2 rounded-xl transition-colors"
-                >
-                  <div className="relative w-24 h-16 md:w-32 md:h-20 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/5 shadow-lg">
-                    <video
-                      className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500"
-                      src={`${reel.video_url}#t=2.0`}
-                      preload="metadata"
-                      muted
-                      playsInline
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors">
-                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform">
-                        <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: '"FILL" 1' }}>play_arrow</span>
-                      </div>
-                    </div>
-                  </div>
-                  <span className="font-display-lg text-xs md:text-sm font-bold text-white/80 group-hover:text-white tracking-widest uppercase transition-colors">
-                    {reel.title}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Disciplines - Desktop (Bottom Row) */}
       <div className={`hidden md:flex absolute bottom-6 left-12 right-12 z-20 justify-between gap-4 text-xs tracking-[0.2em] font-semibold text-white/40 uppercase select-none transition-opacity duration-300 ${hasInteracted ? 'animate-ui pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
